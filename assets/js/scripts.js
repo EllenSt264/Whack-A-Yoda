@@ -17,3 +17,27 @@ let timeLimit = 20000;
 let score = 0;
 let countdown;
 
+function pickRandomHole(){
+    /* Because there are sixes holes, the randomHole variable
+    will return a random number between 0 and 5 (1 - 6)
+    As we need whole numbers, not decimals, we wrap the Math.random()
+    in Math.floor which will round the numbers down
+    */
+    const randomHole = Math.floor(Math.random() * holes.length);
+    const hole = holes[randomHole];     // randomly picks one of the six available holes
+    /* We want to make sure that
+    the new hole is different than the previous one,
+    so the mole doesn't appear in the same place twice
+    */
+    if (hole === lastHole) {
+        // if the same hole is selected, it will run again to pick a different one
+        return pickRandomHole(hole);    
+    }
+    /*If the same hole was picked, then the if statement will be skipped and 
+    the function will keep running
+    So here, lastHole = hole so that
+    we can compare the next one against it
+    */
+    lastHole = hole;
+    return hole;
+}
