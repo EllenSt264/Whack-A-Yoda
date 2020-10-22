@@ -69,6 +69,7 @@ button {
 .hole {
     flex: 1 0 33.33%;   /* shorthand for flex-grow, flex-shrink & flex-basis */
     position: relative;
+    overflow: hidden;
 }
     /**
         * flex-grow specifies how much this element will grow,
@@ -98,13 +99,13 @@ button {
 
 .mole {
     background-image: url("../img/yoda1.png");
-    background-repeat: no-repeat;
-    background-position: bottom;
     position: absolute;
-    top: 0;
+    top: 100%;      /* will hide the mole - as long as overflow:hidden is set on the hole class */
     width: 100%;
     height: 100%;
     transition: 0.4s;
+    background-repeat: no-repeat;
+    background-position: bottom;
 }
 
 .mole.small {
@@ -114,3 +115,11 @@ button {
 .mole.large {
     background-size: 80%;
 }
+
+.hole.up .mole {
+    top: 0;
+}
+
+/* When hole element has an additional class of up
+target its associated mole element and set its top value to 0,
+which will make it peak out */
