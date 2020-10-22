@@ -104,3 +104,37 @@ function startGame() {
 }
 
 startButton.addEventListener("click", startGame);
+
+/*  e stands for built-in JavaScript event object,
+which holds information about the event that is occuring in browser
+at the point when this function runs.
+In this case, e will have mainly target property which holds
+ a reference to which element was clicked
+*/
+function whack(e) {
+    score++;
+    /*  Gives visual feedback when the mole is clicked
+    This keyword is used to refer to the element clicked */
+    this.style.backgroundImage = "url('assets/img/yoda2.png')";
+    this.style.pointerEvents = "none";      // disables input after first click so you can click the mole only once
+    // sets the image back to yoda1 after being clicked
+    setTimeout(() => {
+        this.style.backgroundImage = "url('assets/img/yoda1.png')";
+        this.style.pointerEvents = "all";   // resets so you can click the mole again on its next pop-up
+    }, 800);
+    scoreBoard.textContent = score;
+}
+/*
+bind method allows us to bind a reference and force JavaScript to remember
+what this keyword stands for 
+But there is a simplier way to do this with es6 syntax:
+all you need to do is swap regular JavaScript callback function
+to es6 arrow function
+es6 functions bind context automatically by default,
+so there is no need to use bind method
+*/
+
+/*  Cycle through moles element mole list,
+and for each element inside attach an event listner to it */
+moles.forEach(mole => mole.addEventListener("click", whack));
+
