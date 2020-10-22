@@ -97,3 +97,22 @@ button {
     bottom: -30px;
     background-size: contain;
 }
+
+.mole {
+    background-image: url("../img/yoda1.png");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transition: 0.4s;
+}
+
+.mole.small {
+    background-size: 60%;
+}
+
+.mole.large {
+    background-size: 80%;
+}
