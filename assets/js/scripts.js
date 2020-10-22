@@ -62,4 +62,45 @@ function popOut() {
     }, time);
 }
 
-popOut();
+function startGame() {
+    countdown = timeLimit/1000;     // timeLimit is set to 20000 milliseconds, which is 20 seconds
+    scoreBoard.textContent = 0;
+    scoreBoard.style.display = "block";     // will make the score invisible until starting the game
+    countdownBoard.textContent = countdown;
+    timeUp = false;     // in case it was set to true in the previous game
+    score = 0;      // to reset the game score if the player wants to play again
+    popOut();
+    setTimeout(function() {
+        /* This will cause the if statement on line 59 to fail
+        and will stop the next mole from popping up */
+        timeUp = true;  
+    }, timeLimit);
+
+    /* setInterval is similar to setTimeout,
+    but setTimeout takes two arguments: callback function and a value in milliseconds -
+    how LONG to WAIT before we run that code.
+    setInterval also takes 2 arguments: callback function and a value in milliseconds -
+    how OFTEN to run it.
+
+    setTimeout will run its function once,
+    but setInterval will run its code over and over until we call
+    clear interval
+    */
+    let startCountdown = setInterval(function(){
+        countdown -= 1;     // 20 19 18 17 ...
+        // as each down countdown value changes, we want that value to be displayed
+        countdownBoard.textContent = countdown;  
+        // don't want negative numbers
+        if (countdown < 0) {
+            countdown = 0;
+            /*  for clearInterval, you need to pass it a reference to the 
+            interval you want to clear - which is why we have created a variable
+            called startCountdown on line 89, to keep this entire interval in a variable
+            */
+            clearInterval(startCountdown);
+            countdownBoard.textContent = "Time's Up! Thank you for protecting our planet!"
+        }
+    }, 1000);
+}
+
+startButton.addEventListener("click", startGame);
