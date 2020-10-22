@@ -41,3 +41,25 @@ function pickRandomHole(){
     lastHole = hole;
     return hole;
 }
+
+/* This function will choose a random time in milliseconds
+and add class 'up' to the currently selected hole, which will animate the mole up.
+
+The timeout function will remove the 'up' class after the randomised time to hide the mole.
+*/
+function popOut() {
+    const time = Math.random() * 1300 + 400;    // random hnumber between 400 and 1700 milliseconds
+    const hole = pickRandomHole(holes) // notice this is not the same variable as line 27, because const and let are block scope
+    hole.classList.add("up");
+    /* setTimeout expects two functions:
+    the function we want to call, and how long to wait until we call it
+    */
+    setTimeout(function() {
+        hole.classList.remove("up")     // make the child mole slide back down
+        if (!timeUp) {              // if timeUp is false 
+            popOut();
+        }
+    }, time);
+}
+
+popOut();
