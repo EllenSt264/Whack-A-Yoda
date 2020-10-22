@@ -17,4 +17,83 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background-image: url("../img/background.png");
+    overflow: hidden;
+}
+
+.score {
+    font-size: 150px;
+    color: #010124;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+}
+
+.countdown {
+    position: absolute;
+    top: 500px;
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    color: #010124;
+}
+
+button {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background: #010124;
+    color: white;
+    border-radius: 5px;
+    z-index: 200;
+    cursor: pointer;
+    border: none;   /* displays default browser button styles */
+    outline: none;  /* displays default browser button styles */
+}
+
+.game {
+    border: 2px solid #010124;
+    width: 600px;
+    height: 400px;
+    margin: 70px auto;
+    z-index: 200;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.hole {
+    border: 3px solid red;
+    flex: 1 0 33.33%;   /* shorthand for flex-grow, flex-shrink & flex-basis */
+    position: relative;
+}
+    /**
+        * flex-grow specifies how much this element will grow,
+    relative to the rest of the flexibile items.
+    We set it to 1 because we want all of them to be the same size
+        * flex-shrink is 0 because we don't want these items to flex-shrink
+        * flex-basis 33.33% will ensure that each element
+    is one third of its row
+
+    The parent element (.game) must be set to
+    grid display and flex-wrap in order to make a grid
+
+    **/
+
+.hole:after {
+    /* after-pseduo elements have mandatory content property, we can leave it blank just as long as it's there */
+    content: "";
+    display: block;     /* so it can accept width and height properties */
+    background-image: url("../img/sand1.png");
+    position: absolute;     /* need position: relative on the hole element (parent) for this to work */
+    width: 100%;
+    height: 70px;
+    z-index: 2;
+    bottom: -30px;
+    background-size: contain;
 }
