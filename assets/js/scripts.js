@@ -3,6 +3,7 @@ const scoreBoard = document.querySelector(".score");
 const moles = document.querySelectorAll(".mole");
 const countdownBoard = document.querySelector(".countdown");
 const startButton = document.querySelector(".startButton");
+const highScoreBoard = document.querySelector(".highScore");
 
 /*  Use let keyword
 because the values will be dynamically changed,
@@ -16,6 +17,8 @@ let timeUp = false;
 let timeLimit = 20000;
 let score = 0;
 let countdown;
+let highScore = localStorage.getItem("game1HighScore") || 0;
+highScoreBoard.textContent = "HIGH SCORE: " + highScore;
 
 function pickRandomHole(){
     /* Because there are sixes holes, the randomHole variable
@@ -98,6 +101,11 @@ function startGame() {
             called startCountdown on line 89, to keep this entire interval in a variable
             */
             clearInterval(startCountdown);
+            /*  When the countdown ends, the function will look at the score,
+            compare it to the current high score and if its higher will replace 
+            the value in the local storage and display the new high score value on screen
+            */
+            checkHighScore();
             countdownBoard.textContent = "Time's Up! Thank you for protecting our planet!"
         }
     }, 1000);
@@ -138,3 +146,15 @@ so there is no need to use bind method
 and for each element inside attach an event listner to it */
 moles.forEach(mole => mole.addEventListener("click", whack));
 
+
+function checkHighScore() {
+        /* Only want to run the code if score is higher
+        than currently stored high score, or 
+        if there is no stored high score */
+        if (score > localStorage.getItem("game1HighScore")) {
+            localStorage.setItem("game1HighScore", score);
+            // Update highScore variable with the new high score
+            highScore = score;
+            highScoreBoard.textContent = "HIGH SCORE: " + highScore;
+        }
+    }
